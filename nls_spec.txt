@@ -1,0 +1,33 @@
+svn://svn.reactos.org/reactos/trunk/reactos/tools/create_nls/
+
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Nls
+
+format of NLS file such as C:\Windows\System32\C_932.NLS
+
+guessing...
+================================================================================
+  NLS CODEPAGE (C_XXX.NLS)
+================================================================================
+                  +---------------------------------------------------------------
+          HEADER  | WORD      wSize  size in word (0x0D)
+                  | WORD      CodePage
+                  | WORD      MaxCharSize
+                  | WORD      DefaultChar
+                  | WORD      UnicodeDefaultChar
+                  | WORD      DefaultCharWC  (maybe Unicode char of DefaultChar)
+                  | WORD      UnicodeDefaultCharMB  (maybe CodePage char of UnicodeDefaultChar)
+                  | BYTE[12]  LeadByte
+                  +---------------------------------------------------------------
+  MB TO WC TABLE  | WORD      offset of Unicode to CP table in word
+                  | WORD[256] primary CP to Unicode table
+                  | WORD      OEM glyph table size in words
+                  | WORD[size] OEM to Unicode table
+                  | WORD      Number of DBCS LeadByte range
+                  | if range != 0:
+                  |   WORD[256] offsets
+                  |   WORD[num_of_leadbyte][256] sub table
+                  +---------------------------------------------------------------
+  WC TO MB TABLE  | WORD      Unknown (It seems 0x0000 for MaxCharSize==1, 0x0004 for MaxCharSize==2)
+                  | BYTE[65536] or WORD[65536] (depends on MaxCharSize) Unicode To CP table
+                  +---------------------------------------------------------------
+================================================================================
